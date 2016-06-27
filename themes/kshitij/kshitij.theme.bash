@@ -46,8 +46,7 @@ parse_git_branch () {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-function prompt_command() {
-  PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]: \[$OFFWHITE\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$GREEN\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
-}
+PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]: \[$OFFWHITE\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$GREEN\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
 
-PROMPT_COMMAND=prompt_command
+# Record each line as it gets issued
+PROMPT_COMMAND="history -a"
